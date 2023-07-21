@@ -2,7 +2,7 @@
 import random
 
 # Assign a random signed number to the variable 'number'
-number = random.randint(-100, 100)
+number = random.randint(-99, 99)
 
 # Check whether the number is positive, negative, or zero and print the corresponding message
 if number > 0:
