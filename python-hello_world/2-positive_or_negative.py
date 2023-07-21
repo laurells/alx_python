@@ -5,7 +5,7 @@ import random
 number = random.randint(-100, 100)
 
 # Print the number
-print(number)
+print(number, end=" ")
 
 # Check whether the number is positive, negative, or zero and print the corresponding message
 if number > 0:
