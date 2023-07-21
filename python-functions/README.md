@@ -7,7 +7,8 @@ Functions in Python are blocks of reusable code that perform a specific task. Th
 In Python, you define a function using the def keyword, followed by the function name, a pair of parentheses (), and a colon :. The function body is indented below the function definition.
 
 
-```def greet():
+```python
+def greet():
     print("Hello, World!")
 To call a function, simply write the function name followed by a pair of parentheses ().
 greet()  # Output: Hello, World!
