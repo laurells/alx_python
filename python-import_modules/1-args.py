@@ -3,7 +3,7 @@ import sys
 def print_arguments(args):
     num_args = len(args)
 
-    print("Number of argument(s):", num_args)
+    print(f"{num_args} argument:")
     if num_args == 0:
         return
     elif num_args == 1:
