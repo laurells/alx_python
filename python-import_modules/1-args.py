@@ -3,14 +3,12 @@ import sys
 def print_arguments(args):
     num_args = len(args)
 
-    print(f"Number of argument(s): {num_args}", end='')
+    print("Number of argument(s):", num_args)
     if num_args == 0:
-        print(".")
+        return
     elif num_args == 1:
-        print(f", argument: {args[0]}")
         print("1:", args[0])
     else:
-        print(f", arguments: {', '.join(args)}")
         for i, arg in enumerate(args, 1):
             print(f"{i}: {arg}")
 
