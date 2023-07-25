@@ -4,7 +4,7 @@ def print_arguments(args):
     num_args = len(args)
 
     if num_args == 0:
-        print("0 arguments")
+        print("0 arguments.")
     elif num_args == 1:
         print("1 argument:")
         print("1:", args[0])
