@@ -9,4 +9,4 @@ if __name__ == "__main__":
         message = "C is fun"
         raise_exception_msg(message)
     except NameException as e:
-        print(e)
+        print(str(e))
