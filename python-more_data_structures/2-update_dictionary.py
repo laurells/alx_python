@@ -1,11 +1,11 @@
 def update_dictionary(a_dictionary, key, value):
     if not isinstance(key, str):
         raise TypeError("Key must be a string")
-    
-    # Check if the key exists in the dictionary
-    if key in a_dictionary:
-        # If the key exists, update the value
-        a_dictionary[key] = value
-    else:
-        # If the key doesn't exist, add a new key-value pair
-        a_dictionary[key] = value
+
+    # Check if the dictionary is None or empty
+    if a_dictionary is None:
+        a_dictionary = {}  # Create an empty dictionary
+
+    # Update the dictionary with the key-value pair
+    a_dictionary[key] = value
+    return a_dictionary
