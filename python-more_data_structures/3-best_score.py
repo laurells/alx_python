@@ -1,4 +1,6 @@
 def best_score(a_dictionary):
+    if a_dictionary is None:
+        return None
     best_student = None
     best_score = None
     
