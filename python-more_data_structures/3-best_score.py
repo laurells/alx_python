@@ -7,4 +7,4 @@ def best_score(a_dictionary):
             best_score = score
             best_student = student
             
-    return best_score
+    return best_student
