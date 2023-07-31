@@ -1,4 +1,4 @@
-# 4-square.py
+# 3-square.py
 
 """Square Module
 
