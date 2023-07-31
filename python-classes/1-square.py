@@ -1,4 +1,38 @@
+# 1-square.py
+
+"""Square Module
+
+This module defines the Square class, representing a square shape.
+
+Example:
+    Create a square with a size of 5, calculate its area and perimeter.
+    >>> square = Square(5)
+    >>> square.area()
+    25
+    >>> square.perimeter()
+    20
+
+Attributes:
+    None
+
+"""
+
+
 class Square:
+    """
+    A class representing a square.
+
+    Attributes:
+        __size (int): The size of the square.
+
+    Methods:
+        __init__(self, size=0): Initialize a Square object with the given size.
+        area(self): Calculate and return the area of the square.
+        perimeter(self): Calculate and return the perimeter of the square.
+        get_size(self): Get the current size of the square.
+        set_size(self, size=0): Set the size of the square to the given value.
+    """
+
     def __init__(self, size=0):
         """
         Initialize a Square object with the given size.
