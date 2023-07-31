@@ -1,3 +1,25 @@
+# -*- coding: utf-8 -*-
+"""Square Module
+
+This module defines the Square class, representing a square shape.
+
+Example:
+    Create a square with a size of 5, calculate its area, and print its pattern.
+    >>> square = Square(5)
+    >>> square.area()
+    25
+    >>> square.my_print()
+    #####
+    #####
+    #####
+    #####
+    #####
+
+Attributes:
+    None
+
+"""
+
 class Square:
     """
     A class representing a square.
