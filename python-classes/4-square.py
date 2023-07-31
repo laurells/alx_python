@@ -4,7 +4,8 @@
 This module defines the Square class, representing a square shape.
 
 Example:
-    Create a square with a size of 5, calculate its area, and print its pattern.
+    Create a square with a size of 5, 
+    calculate its area, and print its pattern.
     >>> square = Square(5)
     >>> square.area()
     25
@@ -19,6 +20,7 @@ Attributes:
     None
 
 """
+
 
 class Square:
     """
