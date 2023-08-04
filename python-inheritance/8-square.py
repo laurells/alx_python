@@ -1,3 +1,22 @@
+"""
+Module: geometry_classes
+
+This module defines base and derived geometric classes for calculations and validations.
+
+Classes:
+- BaseGeometry: A base class for geometric calculations.
+- Rectangle: A class representing a rectangle.
+- Square: A class representing a square, which is a specific type of rectangle.
+
+Module Author:
+Laurels Echichinwo
+
+Last Updated:
+04/08/2023
+
+"""
+
+
 class BaseGeometry:
     """
     A base class for geometric calculations.
