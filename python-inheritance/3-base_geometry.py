@@ -25,5 +25,4 @@ class BaseGeometry:
     Attributes:
     None
     """
-    def __init_subclass__(cls):
-        pass
+    __init_subclass__ = None
