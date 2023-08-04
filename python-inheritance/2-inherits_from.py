@@ -4,7 +4,7 @@ Module: class_checks
 Module provides functions for checking class relationships and instances.
 
 Functions:
-- inherits_from(obj, a_class): Check if an object inherits from a specified class.
+- inherits_from(obj, a_class): Check if object inherits from a specified class.
 
 """
 
