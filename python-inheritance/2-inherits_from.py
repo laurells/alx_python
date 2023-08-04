@@ -1,3 +1,14 @@
+"""
+Module: class_checks
+
+This module provides utility functions for checking class relationships and instances.
+
+Functions:
+- inherits_from(obj, a_class): Check if an object inherits (directly or indirectly) from a specified class.
+
+"""
+
+
 def inherits_from(obj, a_class):
     """
     Check if an object inherits (directly or indirectly) from a specified class.
