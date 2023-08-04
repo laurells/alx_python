@@ -28,6 +28,7 @@ class BaseGeometry:
     Attributes:
     None
     """
+
     def area(self):
         """
         Calculate the area of geometric shape. Not implemented in base class.
@@ -36,7 +37,7 @@ class BaseGeometry:
         Exception: Indicates that area calculation is not implemented.
         """
         raise Exception("area() is not implemented")
-    
+
     def integer_validator(self, name, value):
         """
         Validate that a value is a positive integer.
@@ -68,6 +69,7 @@ class Rectangle(BaseGeometry):
     - __width (int): The width of the rectangle.
     - __height (int): The height of the rectangle.
     """
+
     def __init__(self, width, height):
         """
         Initialize a Rectangle instance with width and height.
@@ -82,7 +84,7 @@ class Rectangle(BaseGeometry):
         self.integer_validator("height", height)
         self.__width = width
         self.__height = height
-        
+
     def area(self):
         """
         Calculate the area of the rectangle.
@@ -91,7 +93,7 @@ class Rectangle(BaseGeometry):
         int: The calculated area of the rectangle.
         """
         return self.__width * self.__height
-    
+
     def __str__(self):
         """
         Return a string representation of the rectangle.
@@ -113,6 +115,7 @@ class Square(Rectangle):
     Attributes:
     - __size (int): The size of the square, representing both width and height.
     """
+
     def __init__(self, size):
         """
         Initialize a Square instance with a size.
