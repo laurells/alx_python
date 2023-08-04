@@ -1,7 +1,7 @@
 """
 Module: geometry_classes
 
-This module defines base and derived geometric classes for calculations and validations.
+This module defines base and derived geometric classes.
 
 Classes:
 - BaseGeometry: A base class for geometric calculations.
@@ -22,15 +22,15 @@ class BaseGeometry:
     A base class for geometric calculations.
 
     Methods:
-    - area(): Raises an exception indicating that area calculation is not implemented.
-    - integer_validator(name, value): Validates that a value is a positive integer.
+    - area(): Raises an exception indicating calculation not implemented.
+    - integer_validator(name, value): Validates a value as positive integer.
 
     Attributes:
     None
     """
     def area(self):
         """
-        Calculate the area of a geometric shape. Not implemented in the base class.
+        Calculate the area of geometric shape. Not implemented in base class.
 
         Raises:
         Exception: Indicates that area calculation is not implemented.
@@ -60,7 +60,7 @@ class Rectangle(BaseGeometry):
     A class representing a rectangle.
 
     Methods:
-    - __init__(width, height): Initialize a Rectangle instance with width and height.
+    - __init__(width, height): Initialize a Rectangle instance.
     - area(): Calculate the area of the rectangle.
     - __str__(): Return a string representation of the rectangle.
 
@@ -82,7 +82,7 @@ class Rectangle(BaseGeometry):
         self.integer_validator("height", height)
         self.__width = width
         self.__height = height
-    
+        
     def area(self):
         """
         Calculate the area of the rectangle.
