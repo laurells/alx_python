@@ -26,6 +26,13 @@ class BaseGeometry:
     Attributes:
     None
     """
+
+    def __dir__(self):
+        attributes = super().__dir__()
+        new_attribute_list = [
+            item for item in attributes if item != "__init_subclass__"]
+        return new_attribute_list
+
     def area(self):
         """
         Calculate the area of a geometric shape. Not implemented in the base class.
@@ -34,7 +41,7 @@ class BaseGeometry:
         Exception: Indicates that area calculation is not implemented.
         """
         raise Exception("area() is not implemented")
-    
+
     def integer_validator(self, name, value):
         """
         Validate that a value is a positive integer.
