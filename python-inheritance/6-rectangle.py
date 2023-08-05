@@ -74,6 +74,12 @@ class Rectangle(BaseGeometry):
     - __height (int): The height of the rectangle.
     """
 
+    def __dir__(self):
+        attributes = super().__dir__()
+        new_attribute_list = [
+            item for item in attributes if item != "__init_subclass__"]
+        return new_attribute_list
+
     def __init__(self, width, height):
         """
         Initialize a Rectangle instance with width and height.
