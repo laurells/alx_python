@@ -25,14 +25,3 @@ class Base:
         else:
             Base.__nb_objects += 1  # Increment the object counter
             self.id = Base.__nb_objects  # Assign the new value to the 'id' attribute
-
-# Test
-obj1 = MyClass1(name="Object 1")
-obj2 = MyClass2(value="Value 1")
-obj3 = MyClass1()
-obj4 = MyClass2()
-
-print(obj1.id)  # Output: 1
-print(obj2.id)  # Output: 1
-print(obj3.id)  # Output: 2
-print(obj4.id)  # Output: 2
