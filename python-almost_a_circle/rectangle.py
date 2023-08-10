@@ -109,3 +109,55 @@ class Rectangle(Base):
         if not isinstance(value, int) or value < 0:
             raise ValueError(
                 f"{attribute_name} must be a non-negative integer")
+            
+    def area(self):
+        """
+        Calculates and returns the area value of the Rectangle instance.
+
+        Returns:
+            int: The area of the rectangle.
+        """
+        return self.width * self.height
+    
+    def display(self):
+        """
+        Displays the Rectangle instance by printing it with '#' characters.
+        """
+        #for _ in range(self.height):
+            #print('#' * self.width)
+        for _ in range(self.y):
+            print()
+        for _ in range(self.height):
+            print(' ' * self.x + '#' * self.width)
+            
+    def __str__(self):
+        """
+        Overrides the __str__ method to provide a custom string representation.
+
+        Returns:
+            str: A formatted string representation of the Rectangle.
+        """
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+    
+    def update(self, *args, **kwargs):
+        """
+        Updates the Rectangle instance with the provided attributes.
+
+        Args:
+            *args: Positional arguments to assign to attributes in the order: id, width, height, x, y.
+            **kwargs: Keyword arguments (key-value pairs) to assign attributes.
+        """
+        if args:
+            if len(args) >= 1:
+                self.id = args[0]
+            if len(args) >= 2:
+                self.width = args[1]
+            if len(args) >= 3:
+                self.height = args[2]
+            if len(args) >= 4:
+                self.x = args[3]
+            if len(args) >= 5:
+                self.y = args[4]
+        elif kwargs:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
