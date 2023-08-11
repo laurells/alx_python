@@ -14,7 +14,13 @@ def search_user_by_letter(letter):
     url = "http://0.0.0.0:5000/search_user"
     payload = {'q': letter}
     response = requests.post(url, data=payload)
-    return response.json()
+    
+    try:
+        response_json = response.json()
+        return response_json
+    except ValueError as e:
+        print("Error decoding JSON response:", e)
+        return None
 
 if __name__ == '__main__':
     """
@@ -30,7 +36,9 @@ if __name__ == '__main__':
     response_json = search_user_by_letter(letter)
 
     # Check if the JSON response is valid and not empty
-    if isinstance(response_json, dict) and response_json:
+    if response_json is None:
+        print("No response or invalid JSON")
+    elif isinstance(response_json, dict) and response_json:
         user_id = response_json.get('id')
         user_name = response_json.get('name')
         print(f"[{user_id}] {user_name}")
