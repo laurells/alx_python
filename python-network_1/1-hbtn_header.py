@@ -1,6 +1,6 @@
 """
-Module: 1-hbtn_header.py
-This module defines a script to fetch and display the value of the X-Request-Id header from a URL's response.
+Script: 1-hbtn_header.py
+This script defines a function to fetch and display the value of the X-Request-Id header from a URL's response.
 """
 
 import requests
