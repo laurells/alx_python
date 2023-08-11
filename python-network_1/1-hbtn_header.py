@@ -42,4 +42,4 @@ if __name__ == '__main__':
     if x_request_id:
         print(x_request_id)
     else:
-        print("X-Request-Id not found in the response header")
+        print()
