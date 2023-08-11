@@ -1,5 +1,5 @@
 """
-Module: 1-hbtn_status.py
+Module: 1-hbtn_header.py
 This module defines a script to fetch and display the value of the X-Request-Id header from a URL's response.
 """
 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     """
     # Check the number of command-line arguments
     if len(sys.argv) != 2:
-        print("Usage: python 1-hbtn_status.py <URL>")
+        print("Usage: python 1-hbtn_header.py <URL>")
         sys.exit(1)
 
     # Get the URL from the command-line argument
