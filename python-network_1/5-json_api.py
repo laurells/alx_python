@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     # Check if the JSON response is valid and not empty
     if response_json is None:
-        print("No response or invalid JSON")
+        print("Not a valid JSON")
     elif isinstance(response_json, dict) and response_json:
         user_id = response_json.get('id')
         user_name = response_json.get('name')
