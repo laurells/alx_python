@@ -99,16 +99,19 @@ class Rectangle(Base):
         """
         Validates that the given value is a positive integer.
         """
-        if not isinstance(value, int) or value <= 0:
-            raise ValueError(f"{attribute_name} must be a positive integer")
+        if not isinstance(value, int):
+            raise TypeError(f"{attribute_name} must be an integer")
+        if value <= 0:
+            raise ValueError(f"{attribute_name} must be > 0")
 
     def validate_non_negative_integer(self, value, attribute_name):
         """
         Validates that the given value is a non-negative integer.
         """
-        if not isinstance(value, int) or value < 0:
-            raise ValueError(
-                f"{attribute_name} must be a non-negative integer")
+        if not isinstance(value, int):
+            raise TypeError(f"{attribute_name} must be an integer")
+        if value < 0:
+            raise ValueError(f"{attribute_name} must be >= 0")
             
     def area(self):
         """
