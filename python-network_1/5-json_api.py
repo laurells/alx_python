@@ -19,7 +19,6 @@ def search_user_by_letter(letter):
         response_json = response.json()
         return response_json
     except ValueError as e:
-        print("Error decoding JSON response:", e)
         return None
 
 if __name__ == '__main__':
