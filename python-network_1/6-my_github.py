@@ -25,4 +25,4 @@ if __name__ == '__main__':
     token = sys.argv[2]
     
     user_id = fetch_user_id(username, token)
-    print("Your GitHub user ID:", user_id)
+    print(user_id)
