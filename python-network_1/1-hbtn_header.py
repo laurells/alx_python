@@ -40,6 +40,6 @@ if __name__ == '__main__':
 
     # Print the X-Request-Id value if found, or a message if not found
     if x_request_id:
-        print("X-Request-Id:", x_request_id)
+        print(x_request_id)
     else:
         print("X-Request-Id not found in the response header")
