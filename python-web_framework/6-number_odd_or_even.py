@@ -97,7 +97,7 @@ def number_template(n):
         str: An HTML page with "Number: n" inside the <h1> tag.
     """
     if isinstance(n, int):
-        return render_template('number_template.html', number=n)
+        return render_template('5-number.html', number=n)
     else:
         return 'Not Found', 404
 
@@ -115,9 +115,9 @@ def number_odd_or_even(n):
     """
     if isinstance(n, int):
         if n % 2 == 0:
-            return render_template('number_odd_even_template.html', number=n, result='even')
+            return render_template('6-number_odd_or_even.html', number=n, result='even')
         else:
-            return render_template('number_odd_even_template.html', number=n, result='odd')
+            return render_template('6-number_odd_or_even.html', number=n, result='odd')
     else:
         return 'Not Found', 404
 
