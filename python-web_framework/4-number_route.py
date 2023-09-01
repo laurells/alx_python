@@ -1,7 +1,6 @@
 """
 This module contains functions for flask framework.
 """
-# Import the Flask class and escape function from the Flask module
 from flask import Flask, escape
 
 # Create an instance of the Flask application
@@ -30,9 +29,7 @@ def hbnb():
     return 'HBNB'
 
 # Define a route for "/c/<text>" and allow trailing slashes
-# This route handles a variable "text" and provides a default value "is_cool"
 @app.route('/c/<text>', strict_slashes=False)
-@app.route('/c/', strict_slashes=False)
 def c_with_text(text="is_cool"):
     """
     This function handles the "/c/<text>" route and responds with "C " followed by the value of the text variable.
@@ -51,9 +48,7 @@ def c_with_text(text="is_cool"):
     return 'C {}'.format(formatted_text)
 
 # Define a route for "/python/<text>" and allow trailing slashes
-# This route handles a variable "text" and provides a default value "is_cool"
 @app.route('/python/<text>', strict_slashes=False)
-@app.route('/python/', strict_slashes=False)
 def python_with_text(text="is_cool"):
     """
     This function handles the "/python/<text>" route and responds with "Python " followed by the value of the text variable.
@@ -71,7 +66,24 @@ def python_with_text(text="is_cool"):
     formatted_text = escape(text.replace('_', ' '))
     return 'Python {}'.format(formatted_text)
 
+# Define a route for "/number/<int:n>" and allow trailing slashes
+@app.route('/number/<int:n>', strict_slashes=False)
+def number(n):
+    """
+    This function handles the "/number/<n>" route and responds with a message indicating whether "n" is a number.
+
+    Args:
+        n (int): The integer provided in the URL.
+
+    Returns:
+        str: A message indicating whether "n" is a number.
+    """
+    if isinstance(n, int):
+        return '{} is a number'.format(n)
+    else:
+        return 'Not Found', 404
+
 # Run the Flask application when this script is executed directly
 if __name__ == '__main__':
-    # Start the Flask development server
+    # Start the Flask development server, listening on 0.0.0.0:5000
     app.run(host='0.0.0.0', port=5000)
