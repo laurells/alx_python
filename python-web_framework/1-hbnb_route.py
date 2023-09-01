@@ -1,3 +1,6 @@
+"""
+This module contains functions for flask framework.
+"""
 # Import the Flask class from the Flask module
 from flask import Flask
 

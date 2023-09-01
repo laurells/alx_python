@@ -1,3 +1,6 @@
+"""
+This module contains functions for flask framework.
+"""
 # Import the Flask class and escape function from the Flask module
 from flask import Flask, escape
 
