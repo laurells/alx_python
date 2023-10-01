@@ -1,6 +1,6 @@
+import csv
 import requests
 import sys
-import csv
 
 def get_employee_info(employee_id):
     try:
@@ -10,23 +10,32 @@ def get_employee_info(employee_id):
         employee_data = response.json()
         employee_name = employee_data["name"]
 
-        # Fetch employee's TODO list
+        # Fetch employee's To-Do list
         todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
         response = requests.get(todos_url)
         todos_data = response.json()
 
-        # Create a CSV file for the employee
-        csv_filename = f"{employee_id}.csv"
-        with open(csv_filename, mode="w", newline="") as csv_file:
-            csv_writer = csv.writer(csv_file)
-            csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+        # Prepare CSV file name
+        csv_file_name = f"{employee_id}.csv"
 
-            # Write TODO tasks to the CSV file
+        # Open CSV file for writing
+        with open(csv_file_name, mode='w', newline='') as csv_file:
+            fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            
+            # Write CSV header
+            writer.writeheader()
+
+            # Write employee's tasks to CSV
             for todo in todos_data:
-                task_completed_status = "Completed" if todo["completed"] else "Not Completed"
-                csv_writer.writerow([employee_id, employee_name, task_completed_status, todo["title"]])
+                writer.writerow({
+                    "USER_ID": employee_id,
+                    "USERNAME": employee_name,
+                    "TASK_COMPLETED_STATUS": str(todo["completed"]),
+                    "TASK_TITLE": todo["title"]
+                })
 
-        print(f"Data exported to {csv_filename}")
+        print(f"Data exported to {csv_file_name}")
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
