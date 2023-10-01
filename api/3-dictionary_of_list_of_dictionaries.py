@@ -1,62 +1,47 @@
-import requests
 import json
+import requests
+import sys
 
-def get_employee_info(employee_id):
-    try:
-        # Fetch employee details
-        employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-        response = requests.get(employee_url)
-        employee_data = response.json()
-        employee_name = employee_data["name"]
+def fetch_data(url):
+    response = requests.get(url)
+    if response.status_code != 200:
+        print(f"Failed to fetch data from {url}")
+        sys.exit(1)
+    return response.json()
 
-        # Fetch employee's TODO list
-        todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
-        response = requests.get(todos_url)
-        todos_data = response.json()
+def main(output_file):
+    # Fetch user and tasks data
+    users = fetch_data("https://jsonplaceholder.typicode.com/users")
+    tasks = fetch_data("https://jsonplaceholder.typicode.com/todos")
 
-        # Create a dictionary for the employee's tasks
-        employee_tasks = {
-            "username": employee_name,
-            "tasks": []
-        }
+    # Create a dictionary to store the tasks for each user
+    user_tasks = {}
 
-        # Populate the tasks list
-        for todo in todos_data:
-            task_completed_status = "Completed" if todo["completed"] else "Not Completed"
-            task_entry = {
-                "task": todo["title"],
-                "completed": task_completed_status,
-                "username": employee_name
-            }
-            employee_tasks["tasks"].append(task_entry)
+    # Populate the user_tasks dictionary
+    for user in users:
+        user_id = user["id"]
+        username = user["username"]
+        user_tasks[user_id] = []
 
-        return employee_id, employee_tasks
+        for task in tasks:
+            if task["userId"] == user_id:
+                task_data = {
+                    "username": username,
+                    "task": task["title"],
+                    "completed": task["completed"]
+                }
+                user_tasks[user_id].append(task_data)
 
-    except requests.exceptions.RequestException as e:
-        print(f"An error occurred: {e}")
-        return None, None
-    except KeyError:
-        print(f"Invalid employee ID or data format for employee {employee_id}")
-        return None, None
+    # Write the data to the output file in JSON format
+    with open(output_file, "w") as json_file:
+        json.dump(user_tasks, json_file)
 
-def get_all_employees_todo():
-    all_employees_data = {}
-
-    # Fetch data for all employees
-    for employee_id in range(1, 11):  # Assuming employee IDs from 1 to 10
-        employee_id, employee_data = get_employee_info(employee_id)
-        if employee_id is not None and employee_data is not None:
-            all_employees_data[employee_id] = employee_data
-
-    return all_employees_data
-
-def export_to_json(data):
-    json_filename = "todo_all_employees.json"
-    with open(json_filename, "w") as json_file:
-        json.dump(data, json_file, indent=4)
-
-    print(f"Data for all employees exported to {json_filename}")
+    print(f"Data exported to {output_file}")
 
 if __name__ == "__main__":
-    all_employees_data = get_all_employees_todo()
-    export_to_json(all_employees_data)
+    if len(sys.argv) != 2:
+        print("Usage: python3 3-dictionary_of_list_of_dictionaries.py <output_file>")
+        sys.exit(1)
+
+    output_file = sys.argv[1]
+    main(output_file)
