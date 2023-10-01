@@ -24,7 +24,7 @@ def get_employee_info(employee_id):
         # Display completed tasks
         for todo in todos_data:
             if todo["completed"]:
-                print(f"    {todo['title']}")
+                print(f"\t{todo['title']}")
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
