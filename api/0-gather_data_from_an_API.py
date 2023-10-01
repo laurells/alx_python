@@ -18,11 +18,13 @@ def get_employee_info(employee_id):
         total_tasks = len(todos_data)
         completed_tasks = sum(1 for todo in todos_data if todo["completed"])
 
-        # Display progress with correct first line formatting
-        print(f"Employee {employee_name} is done with tasks ({completed_tasks}/{total_tasks}):", end=" ")
+        # Display progress with the specified formatting
+        print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
+        
+        # Display completed tasks
         for todo in todos_data:
             if todo["completed"]:
-                print(f"\t{todo['title']}")
+                print(f"    {todo['title']}")
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
