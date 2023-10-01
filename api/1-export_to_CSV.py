@@ -1,4 +1,5 @@
 import csv
+import os
 import requests
 import sys
 
@@ -18,24 +19,14 @@ def get_employee_info(employee_id):
         # Prepare CSV file name
         csv_file_name = f"{employee_id}.csv"
 
-        # Open CSV file for writing
-        with open(csv_file_name, mode='w', newline='') as csv_file:
-            fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            
-            # Write CSV header
-            writer.writeheader()
-
-            # Write employee's tasks to CSV
-            for todo in todos_data:
-                writer.writerow({
-                    "USER_ID": employee_id,
-                    "USERNAME": employee_name,
-                    "TASK_COMPLETED_STATUS": str(todo["completed"]),
-                    "TASK_TITLE": todo["title"]
-                })
-
-        print(f"Data exported to {csv_file_name}")
+        # Check if the file exists before reading it
+        if os.path.isfile(csv_file_name):
+            with open(csv_file_name, mode='r') as csv_file:
+                # Read the number of tasks in the CSV
+                num_tasks = len(list(csv.reader(csv_file))) - 1  # Subtract 1 for the header row
+                print(f"Number of tasks in CSV: {num_tasks}")
+        else:
+            print(f"CSV file {csv_file_name} does not exist.")
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
