@@ -1,34 +1,30 @@
+#!/usr/bin/python3
+"""For a given employee ID, returns information about
+their TODO list progress"""
+
 import requests
 import sys
 
-if len(sys.argv) != 2:
-    sys.exit(1)
+if __name__ == "__main__":
 
-employee_id = int(sys.argv[1])
+    userId = sys.argv[1]
+    user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
+                        .format(userId))
 
-employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+    name = user.json().get('name')
 
-employee_response = requests.get(employee_url)
-todos_response = requests.get(todos_url)
+    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
+    totalTasks = 0
+    completed = 0
 
-if employee_response.status_code != 200 or todos_response.status_code != 200:
-    sys.exit(1)
+    for task in todos.json():
+        if task.get('userId') == int(userId):
+            totalTasks += 1
+            if task.get('completed'):
+                completed += 1
 
-employee_data = employee_response.json()
-todo_data = todos_response.json()
-employee_name = employee_data.get("name", "anonymous employee")
+    print('Employee {} is done with tasks({}/{}):'
+          .format(name, completed, totalTasks))
 
-number_of_done_tasks = 0
-total_number_of_tasks = 0
-for task in todo_data:
-    if task["completed"]:
-        number_of_done_tasks += 1
-    total_number_of_tasks += 1
-
-
-print(f"Employee {employee_name} is done with tasks ({number_of_done_tasks}/{total_number_of_tasks})")
-
-
-for task in todo_data:
-    print(f"\t{task['title']}")
+    print('\n'.join(["\t " + task.get('title') for task in todos.json()
+          if task.get('userId') == int(userId) and task.get('completed')]))
