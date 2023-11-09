@@ -1,47 +1,40 @@
 import json
 import requests
-import sys
 
-def fetch_data(url):
-    response = requests.get(url)
-    if response.status_code != 200:
-        print(f"Failed to fetch data from {url}")
-        sys.exit(1)
-    return response.json()
+# Function to fetch tasks for a given user ID
+def fetch_user_tasks(user_id):
+    todos_url = f"https://jsonplaceholder.typicode.com/users/{user_id}/todos"
+    todos_response = requests.get(todos_url)
+    if todos_response.status_code != 200:
+        return []  # Return an empty list if there was an error
+    return todos_response.json()
 
-def main(output_file):
-    # Fetch user and tasks data
-    users = fetch_data("https://jsonplaceholder.typicode.com/users")
-    tasks = fetch_data("https://jsonplaceholder.typicode.com/todos")
+# Function to fetch all user IDs
+def fetch_user_ids():
+    users_url = "https://jsonplaceholder.typicode.com/users"
+    users_response = requests.get(users_url)
+    if users_response.status_code != 200:
+        return []  # Return an empty list if there was an error
+    return [user["id"] for user in users_response.json()]
 
-    # Create a dictionary to store the tasks for each user
-    user_tasks = {}
+# Function to export data in JSON format for all tasks from all employees
+def export_todo_all_employees():
+    all_employee_data = {}
 
-    # Populate the user_tasks dictionary
-    for user in users:
-        user_id = user["id"]
-        username = user["username"]
-        user_tasks[user_id] = []
+    user_ids = fetch_user_ids()
+    for user_id in user_ids:
+        user_tasks = fetch_user_tasks(user_id)
+        employee_name = user_tasks[0]["username"] if user_tasks else "Unknown Employee"
+        
+        #a list of tasks for the current user
+        employee_tasks = [{"username": employee_name, "task": task["title"], "completed": task["completed"]} for task in user_tasks]
+        
+        
+        all_employee_data[user_id] = employee_tasks
 
-        for task in tasks:
-            if task["userId"] == user_id:
-                task_data = {
-                    "username": username,
-                    "task": task["title"],
-                    "completed": task["completed"]
-                }
-                user_tasks[user_id].append(task_data)
-
-    # Write the data to the output file in JSON format
-    with open(output_file, "w") as json_file:
-        json.dump(user_tasks, json_file)
-
-    print(f"Data exported to {output_file}")
+    # Export data to JSON file
+    with open("todo_all_employees.json", "w") as json_file:
+        json.dump(all_employee_data, json_file, indent=4)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 3-dictionary_of_list_of_dictionaries.py <output_file>")
-        sys.exit(1)
-
-    output_file = sys.argv[1]
-    main(output_file)
+    export_todo_all_employees()

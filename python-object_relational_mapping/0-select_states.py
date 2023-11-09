@@ -1,0 +1,37 @@
+import MySQLdb
+import sys
+
+# Check for the correct number of command-line arguments
+if len(sys.argv) != 4:
+    print("Usage: python3 0-select_states.py <username> <password> <database>")
+    sys.exit(1)
+
+# Extract command-line arguments
+username = sys.argv[1]
+password = sys.argv[2]
+database = sys.argv[3]
+
+try:
+    # Connect to the MySQL server
+    conn = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
+
+    # Create a cursor object to interact with the database
+    cursor = conn.cursor()
+
+    # Execute the SQL query to fetch the states
+    cursor.execute("SELECT * FROM states ORDER BY id")
+
+    # Fetch all the rows
+    states = cursor.fetchall()
+
+    # Display the results in the specified format
+    for state in states:
+        print(state)
+
+    # Close the cursor and connection
+    cursor.close()
+    conn.close()
+
+except MySQLdb.Error as e:
+    print("MySQL Error:", e)
+    sys.exit(1)
