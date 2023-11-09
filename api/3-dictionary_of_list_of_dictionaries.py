@@ -35,6 +35,17 @@ def export_todo_all_employees():
     # Export data to JSON file
     with open("todo_all_employees.json", "w") as json_file:
         json.dump(all_employee_data, json_file, indent=4)
+#!/usr/bin/python3
+"""fetches information from JSONplaceholder API and exports to JSON"""
+
+from json import dump
+from requests import get
+from sys import argv
 
 if __name__ == "__main__":
-    export_todo_all_employees()
+    if len(sys.argv) != 2:
+        print("Usage: python3 3-dictionary_of_list_of_dictionaries.py <output_file>")
+        sys.exit(1)
+
+    output_file = sys.argv[1]
+    main(output_file)

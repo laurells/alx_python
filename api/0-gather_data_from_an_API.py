@@ -1,34 +1,48 @@
+#!/usr/bin/python3
+"""For a given employee ID, returns information about
+their TODO list progress"""
+
 import requests
 import sys
 
-if len(sys.argv) != 2:
-    sys.exit(1)
 
-employee_id = int(sys.argv[1])
+def get_employee_data(employee_id):
+    # Define the API endpoints
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
 
-employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+    try:
+        # Fetch employee data
+        user_response = requests.get(user_url)
+        user_data = user_response.json()
+        employee_name = user_data.get('name')
 
-employee_response = requests.get(employee_url)
-todos_response = requests.get(todos_url)
+        # Fetch TODO list data
+        todos_response = requests.get(todos_url)
+        todos_data = todos_response.json()
 
-if employee_response.status_code != 200 or todos_response.status_code != 200:
-    sys.exit(1)
+        # Calculate the number of completed tasks
+        completed_tasks = [task for task in todos_data if task['completed']]
+        num_completed_tasks = len(completed_tasks)
+        total_num_tasks = len(todos_data)
 
-employee_data = employee_response.json()
-todo_data = todos_response.json()
-employee_name = employee_data.get("name", "anonymous employee")
+        # Print employee TODO list progress
+        print(
+            f"Employee {employee_name} is done with tasks({num_completed_tasks}/{total_num_tasks}):")
 
-number_of_done_tasks = 0
-total_number_of_tasks = 0
-for task in todo_data:
-    if task["completed"]:
-        number_of_done_tasks += 1
-    total_number_of_tasks += 1
+        # Print titles of completed tasks
+        for task in completed_tasks:
+            print(f"\t{task['title']}")
 
-
-print(f"Employee {employee_name} is done with tasks ({number_of_done_tasks}/{total_number_of_tasks})")
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
+        sys.exit(1)
 
 
-for task in todo_data:
-    print(f"\t{task['title']}")
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <employee_id>")
+        sys.exit(1)
+
+    employee_id = int(sys.argv[1])
+    get_employee_data(employee_id)
